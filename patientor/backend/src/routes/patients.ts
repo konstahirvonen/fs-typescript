@@ -1,6 +1,6 @@
 import express, { type Request, type Response, type NextFunction } from "express";
 import patientService from "../services/patientService.ts";
-import { NewEntrySchema, type NewPatientEntry, type PatientEntry, type NonSensitivePatientEntry } from "../types.ts";
+import { NewEntrySchema, type NewPatientEntry, type PatientEntry, type NonSensitivePatientEntry, type Patient } from "../types.ts";
 import { z } from "zod";
 
 const router = express.Router();
@@ -8,6 +8,15 @@ const router = express.Router();
 router.get('/', (_req, res: Response<NonSensitivePatientEntry[]>) => {
   const data = patientService.getNonsentiveEntries();
   res.send(data);
+});
+
+router.get("/:id", (req, res: Response<Patient | undefined>) => {
+  const data = patientService.getNonsensitivePatient(req.params.id);
+  if (data) {
+    res.send(data);
+  } else {
+    res.sendStatus(404);
+  }
 });
 
 const newPatientParser = (req: Request, _res: Response, next: NextFunction) => {
