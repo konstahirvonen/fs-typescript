@@ -1,6 +1,6 @@
 import express, { type Request, type Response, type NextFunction } from "express";
 import patientService from "../services/patientService.ts";
-import { NewEntrySchema, type NewPatientEntry, type PatientEntry, type NonSensitivePatientEntry, type Patient } from "../types.ts";
+import { NewPatientSchema, type NewPatientEntry, type PatientEntry, type NonSensitivePatientEntry, type Patient } from "../types.ts";
 import { z } from "zod";
 
 const router = express.Router();
@@ -21,7 +21,7 @@ router.get("/:id", (req, res: Response<Patient | undefined>) => {
 
 const newPatientParser = (req: Request, _res: Response, next: NextFunction) => {
   try {
-    NewEntrySchema.parse(req.body);
+    NewPatientSchema.parse(req.body);
     next();
   } catch (error: unknown) {
     next(error);

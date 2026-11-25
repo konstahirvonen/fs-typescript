@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react"
-import { Patient } from "../../types"
+import { useEffect, useState } from "react";
+import { Patient } from "../../types";
 import patientService from "../../services/patients";
 import { useParams } from "react-router-dom";
 import { Container, Typography } from "@mui/material";
@@ -7,6 +7,7 @@ import MaleIcon from "@mui/icons-material/Male";
 import FemaleIcon from "@mui/icons-material/Female";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import PatientEntries from "./PatientEntries";
+import NewEntry from "./NewEntry";
 
 const PatientPage = () => {
     const [patient, setPatient] = useState<Patient>();
@@ -40,12 +41,14 @@ const PatientPage = () => {
                     <Typography>occupation: {patient.occupation}</Typography>
                     <Typography>date of birth: {patient.dateOfBirth}</Typography>
 
+                    <NewEntry patientId={patient.id} entries={patient.entries} setPatient={setPatient} />
+
                     <PatientEntries patient={patient} />
                     
                 </Container>
             )}
         </div>
-    )
-}
+    );
+};
 
 export default PatientPage;

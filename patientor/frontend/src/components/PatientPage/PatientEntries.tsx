@@ -1,4 +1,4 @@
-import { Container, List, ListItem, ListItemText, Typography } from "@mui/material"
+import { Container, List, ListItem, ListItemText, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import diagnoseService from "../../services/diagnoses";
 import { Diagnosis, Patient, Entry } from "../../types";
@@ -63,6 +63,9 @@ const EntryDetails = ({ entry, diagnoses }: EntryDetailsProps ) => {
                         <Typography>{entry.date} <WorkIcon></WorkIcon> {entry.employerName} </Typography>
                         <Typography>{entry.description}</Typography>
                         <Typography>diagnose by {entry.specialist}</Typography>
+                        <Typography>Sickleave:</Typography>
+                        <Typography>Start date: {entry.sickLeave?.startDate}</Typography>
+                        <Typography>End date: {entry.sickLeave?.endDate}</Typography>
                         <DiagnosisInfo codes={entry.diagnosisCodes} diagnoses={diagnoses} />
                     </Container>
                 </div>
@@ -74,7 +77,10 @@ const EntryDetails = ({ entry, diagnoses }: EntryDetailsProps ) => {
                         <Typography>{entry.date} <MedicalServicesIcon></MedicalServicesIcon> </Typography>
                         <Typography>{entry.description}</Typography>
                         <Typography>diagnose by {entry.specialist}</Typography>
+                        <Typography>Discharge criteria: {entry.discharge.criteria}</Typography>
+                        <Typography>Discharge date: {entry.discharge.date}</Typography>
                         <DiagnosisInfo codes={entry.diagnosisCodes} diagnoses={diagnoses} />
+
                     </Container>
                 </div>
             );
@@ -83,7 +89,7 @@ const EntryDetails = ({ entry, diagnoses }: EntryDetailsProps ) => {
             return exhaustiveCheck;
         }
     }
-}
+};
 
 const PatientEntries = ({ patient } : Props ) => {
     const [diagnoses, setDiagnoses] = useState<Diagnosis[]>();
@@ -94,7 +100,7 @@ const PatientEntries = ({ patient } : Props ) => {
             setDiagnoses(diagnoses);
         };
         void fetchDiagnoses();
-    }, [])
+    }, []);
 
     return (
         <div>
@@ -109,8 +115,8 @@ const PatientEntries = ({ patient } : Props ) => {
                     )}
             </Container>
         </div>
-    )
-}
+    );
+};
 
 export default PatientEntries;
 
