@@ -53,7 +53,7 @@ const initialValues = (type: EntryForm["type"]): EntryForm => {
                 specialist: "",
                 healthCheckRating: "0",
                 diagnosisCodes: []
-            }
+            };
         case "OccupationalHealthCare":
             return {
                 type: "OccupationalHealthCare",
@@ -66,7 +66,7 @@ const initialValues = (type: EntryForm["type"]): EntryForm => {
                     startDate: "",
                     endDate: ""
                 },
-            }
+            };
         case "Hospital":
             return {
                 type: "Hospital",
@@ -93,7 +93,7 @@ const NewEntry = ({ patientId, entries, setPatient }: NewEntryProps) => {
             setDiagnoses(data);
         };
         void fetchDiagnoses();
-    }, [])
+    }, []);
 
     useEffect(() => {
         if (error) {
@@ -168,7 +168,7 @@ const NewEntry = ({ patientId, entries, setPatient }: NewEntryProps) => {
                         .join("\n")
                     );
                 } else {
-                    setError(resError || error.message)
+                    setError(resError || error.message);
                 }
             } else {
                 setError("Unexpected error occured");
@@ -318,7 +318,7 @@ const NewEntry = ({ patientId, entries, setPatient }: NewEntryProps) => {
                 </Box>
             </Box>
         </div>
-    )
-}
+    );
+};
 
 export default NewEntry;

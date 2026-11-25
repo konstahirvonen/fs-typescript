@@ -32,6 +32,7 @@ interface BaseEntry {
   diagnosisCodes?: Array<Diagnosis['code']>;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const HealthCheckRating = {
   Healthy: 0,
   LowRisk: 1,
